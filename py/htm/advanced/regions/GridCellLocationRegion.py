@@ -547,3 +547,14 @@ class GridCellLocationRegion(PyRegion):
             # To get a 2D displacement, you'll dot the n-dimensional displacement with
             # each of these vectors.
             return np.array([b1, b2])
+
+
+    def saveConnectionsToFile(self, filepath):
+        """
+        Binary dumps connections objects into file specified, adding suffix specifying the type
+        """
+        i = 0
+        for m in self._modules:
+            with open(filepath+"_"+str(i)+".dump", "wb") as f:
+                f.write(m.connections.save())
+            i+=1
