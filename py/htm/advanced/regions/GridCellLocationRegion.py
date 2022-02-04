@@ -486,16 +486,6 @@ class GridCellLocationRegion(PyRegion):
         for module in self._modules:
             module.activateRandomLocation()
 
-    def activateGivenLocation(self, location):
-        """
-        activate location for each module by given list of "points"
-        """
-        for module, bumpPhases in zip(self._modules, location):
-            module.activateGivenLocation(bumpPhases)
-
-    def getLocation(self):
-        return [module.bumpPhases for module in self._modules]
-
     def setParameter(self, parameterName, index, parameterValue):
         """
         Set the value of a Spec parameter.
