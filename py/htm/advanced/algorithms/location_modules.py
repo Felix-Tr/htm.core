@@ -407,6 +407,13 @@ class ThresholdedGaussian2DLocationModule(AbstractLocationModule):
         self.bumpPhases = np.array([np.random.random(2)]).T
         self._computeActiveCells()
 
+    def activateGivenLocation(self, bumpPhases):
+        """
+        active point in module by given bumPhases
+        """
+        self.bumpPhases = bumpPhases
+        self._computeActiveCells()
+
     def _movementComputeDelta(self, displacement):
         """
          Calculate delta in the module's coordinates and
