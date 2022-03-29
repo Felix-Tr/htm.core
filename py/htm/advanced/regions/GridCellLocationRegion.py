@@ -296,8 +296,6 @@ class GridCellLocationRegion(PyRegion):
             commands=dict(
                 reset=dict(description="Clear all cell activity"),
                 activateRandomLocation=dict(description="Set the location to a random point"),
-                activateGivenLocation=dict(description="Set the location to a given point for each module"),
-                getLocation=dict(description="Get the location of the modules")
             )
         )
         return spec
@@ -487,16 +485,6 @@ class GridCellLocationRegion(PyRegion):
         """
         for module in self._modules:
             module.activateRandomLocation()
-
-    def activateGivenLocation(self, location):
-        """
-        activate location for each module by given list of "points"
-        """
-        for module, bumpPhases in zip(self._modules, location):
-            module.activateGivenLocation(bumpPhases)
-
-    def getLocation(self):
-        return [module.bumpPhases for module in self._modules]
 
     def setParameter(self, parameterName, index, parameterValue):
         """

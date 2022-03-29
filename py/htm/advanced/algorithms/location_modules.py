@@ -383,8 +383,6 @@ class ThresholdedGaussian2DLocationModule(AbstractLocationModule):
         # rhombus, rather than along the edges of the rhombus. This has no
         # meaningful impact, but it makes visualizations easier to understand.
         self.cellPhases += [[0.5/self.cellsPerAxis], [0.5/self.cellsPerAxis]]
-        # workaround for location reset
-        self.bumpPhases_start = None
 
     def reset(self):
         """
@@ -406,18 +404,7 @@ class ThresholdedGaussian2DLocationModule(AbstractLocationModule):
         """
         Set the location to a random point.
         """
-        if not self.bumpPhases_start:
-            self.bumpPhases = np.array([np.random.random(2)]).T
-            self.bumpPhases_start = self.bumpPhases
-        else:
-            self.bumpPhases = self.bumpPhases_start
-        self._computeActiveCells()
-
-    def activateGivenLocation(self, bumpPhases):
-        """
-        active point in module by given bumPhases
-        """
-        self.bumpPhases = bumpPhases
+        self.bumpPhases = np.array([np.random.random(2)]).T
         self._computeActiveCells()
 
     def _movementComputeDelta(self, displacement):
